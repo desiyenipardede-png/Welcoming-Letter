@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Onboarding Karyawan Baru - Nusanet</title>
+  <link rel="stylesheet" href="welcome.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+  <!-- ===== FORM INPUT OVERLAY ===== -->
+  <div id="inputOverlay" class="overlay-input active">
+    <div class="input-card">
+      <h2>Mulai Onboarding Anda</h2>
+      <form id="onboardingForm">
+        <div class="form-group">
+          <label for="namaKaryawan">Nama Lengkap</label>
+          <input type="text" id="namaKaryawan" placeholder="Masukkan nama lengkap Anda" required>
+        </div>
+
+        <div class="form-group">
+          <label for="divisiPilihan">Pilih Divisi</label>
+          <select id="divisiPilihan" required>
+            <option value="">-- Pilih Divisi --</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn-submit">Mulai Onboarding</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== WELCOME OVERLAY ===== -->
+  <div id="welcomeOverlay" class="overlay-welcome">
+    <div class="welcome-content">
+      <button class="btn-close" onclick="closeWelcome()">×</button>
+      
+      <div class="welcome-header">
+        <h1 id="welcomeTitle"></h1>
+        <div id="welcomeMessage" class="welcome-message"></div>
+      </div>
+
+      <div class="welcome-checklist-preview">
+        <h3>📋 Hal yang Perlu Kamu Ketahui</h3>
+        <ul>
+          <li><i class="fas fa-check"></i> Hari pertama kerja: <strong id="hariKerja"></strong></li>
+          <li><i class="fas fa-check"></i> Jam kerja: <strong>08.30 WIB</strong> (datang 30 menit lebih awal)</li>
+          <li><i class="fas fa-check"></i> Dress code: Kemeja, celana panjang rapi, sepatu</li>
+          <li><i class="fas fa-check"></i> Rambut: Tidak gondrong/mohawk</li>
+        </ul>
+      </div>
+
+      <button class="btn-continue" onclick="goToMainContent()">Lanjut ke Dashboard</button>
+    </div>
+  </div>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <div id="mainContent" class="main-content hidden">
+    <!-- Header -->
+    <header class="onboarding-header">
+      <div class="header-content">
+        <h1>Selamat Datang, <span id="userNameDisplay"></span>! 👋</span></h1>
+        <p id="userDivisionDisplay"></p>
+      </div>
+      <div class="header-profile">
+        <img id="userProfilePic" src="" alt="" class="profile-pic">
+      </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+      <!-- === KONTAK PENTING SECTION === -->
+      <section class="section contacts-section">
+        <h2 class="section-title">👥 Kontak Penting</h2>
+        <div id="kontakContainer" class="contacts-grid"></div>
+      </section>
+
+      <!-- === CHECKLIST SECTION === -->
+      <section class="section checklist-section">
+        <div class="checklist-header">
+          <h2 class="section-title">✅ Onboarding Checklist</h2>
+          <div class="progress-info">
+            <div class="progress-bar-container">
+              <div id="progressBar" class="progress-bar" style="width: 0%"></div>
+            </div>
+            <span id="progressText" class="progress-text">0%</span>
+          </div>
+        </div>
+
+        <div id="checklistContainer" class="checklist-grid"></div>
+      </section>
+    </div>
+  </div>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script src="data/divisi.json" type="application/json" id="divisiData"></script>
+  <script src="data/kontak.json" type="application/json" id="kontakData"></script>
+  <script src="data/checklist.json" type="application/json" id="checklistData"></script>
+  <script src="welcome.js"></script>
+</body>
+</html>

@@ -1,0 +1,1992 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nusanet - Solusi Internet Cepat dan Handal</title>
+  <meta name="description" content="Nusanet - Penyedia layanan internet fiber optic, solusi jaringan untuk bisnis dan rumah.">
+  <meta name="keywords" content="Nusanet, ISP, Internet, Fiber Optic, Jaringan, Cloud">
+
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --nusa-dark: #0A3D62;
+      --nusa-light: #3498DB;
+      --nusa-accent: #FF8C42;
+      --text-primary: #1E293B;
+      --text-secondary: #64748B;
+      --border-color: #E2E8F0;
+      --shadow-lg: 0 20px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* ===== WELCOME OVERLAY ===== */
+    #welcomeOverlay {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(10, 20, 30, 0.6);
+      z-index: 12000;
+      padding: 20px;
+      backdrop-filter: blur(4px);
+      opacity: 1;
+      transition: opacity 0.4s ease;
+    }
+
+    #welcomeOverlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .welcome-container {
+      width: 100%;
+      max-width: 520px;
+    }
+
+    .welcome-card {
+      background: white;
+      border-radius: 16px;
+      box-shadow: var(--shadow-lg);
+      padding: 40px 32px;
+      animation: slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .welcome-header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .nusanet-logo {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--nusa-dark) 0%, var(--nusa-light) 100%);
+      color: white;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      font-weight: 700;
+      margin: 0 auto 16px;
+      box-shadow: 0 4px 12px rgba(10, 61, 98, 0.2);
+    }
+
+    .welcome-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--nusa-dark);
+      margin-bottom: 8px;
+    }
+
+    .welcome-subtitle {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .welcome-form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-label {
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--text-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .form-input {
+      padding: 10px 14px;
+      border: 2px solid var(--border-color);
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: inherit;
+      transition: all 0.2s ease;
+      color: var(--text-primary);
+    }
+
+    .form-input:hover {
+      border-color: var(--nusa-light);
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--nusa-light);
+      box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.1);
+    }
+
+    .btn-submit {
+      padding: 12px 20px;
+      background: linear-gradient(135deg, var(--nusa-dark) 0%, var(--nusa-light) 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-size: 13px;
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(10, 61, 98, 0.3);
+    }
+
+    .btn-submit:active {
+      transform: translateY(0);
+    }
+
+    .welcome-footer-text {
+      text-align: center;
+      font-size: 11px;
+      color: var(--text-secondary);
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-color);
+    }
+
+    /* ===== WELCOME BANNER ===== */
+    .welcome-banner {
+      /* remove blue gradient — use site's default card background */
+      background: #ffffff;
+      color: var(--text-primary);
+      padding: 30px 28px;
+      border-radius: 12px;
+      margin: 30px auto;
+      max-width: 880px;
+      text-align: left;
+      font-family: 'Poppins', sans-serif;
+      box-shadow: 0 8px 20px rgba(10, 61, 98, 0.06);
+      position: relative;
+      opacity: 0;
+      transform: translateY(-12px);
+      animation: slideInDown 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    .welcome-banner h2 {
+      margin: 0 0 12px 0;
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--nusa-dark);
+    }
+
+    .welcome-banner p {
+      margin: 8px 0 12px 0;
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+
+    .welcome-banner strong {
+      font-weight: 600;
+      color: var(--nusa-dark);
+    }
+
+    .welcome-banner .divider {
+      width: 60px;
+      height: 3px;
+      background: #FFE082;
+      margin: 20px auto;
+    }
+
+    .close-banner {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: white;
+      cursor: pointer;
+      font-size: 24px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .close-banner:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.1);
+    }
+
+    /* ===== WELCOME TEAM CARDS ===== */
+    .welcome-team {
+      display: flex;
+      flex-direction: row; /* tampil horizontal seperti team-member */
+      gap: 20px;
+      margin: 32px 0;
+      padding: 24px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .welcome-team-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      width: 280px; /* increased from 220px */
+      box-sizing: border-box;
+      padding: 16px; /* increased from 8px */
+      background: #f8f9fb;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(10, 61, 98, 0.06);
+    }
+
+    .welcome-team-card.delay-1 {
+      animation-delay: 0.1s;
+    }
+
+    .welcome-team-card.delay-2 {
+      animation-delay: 0.25s;
+    }
+
+    .welcome-team-card.delay-3 {
+      animation-delay: 0.4s;
+    }
+
+    .welcome-team-photo {
+      width: 160px; /* increased from 120px */
+      height: 160px; /* increased from 120px */
+      border-radius: 12px;
+      object-fit: cover;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      margin-bottom: 16px; /* increased from 12px */
+      border: 3px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .welcome-team-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--nusa-dark);
+      margin-bottom: 4px;
+    }
+
+    .welcome-team-role {
+      font-size: 13px;
+      color: var(--text-secondary);
+      font-weight: 500;
+      letter-spacing: 0.2px;
+    }
+
+    /* ===== EXISTING STYLES ===== */
+    .sitename {
+      color: var(--nusa-dark);
+      font-weight: 700;
+    }
+
+    .header {
+      background: #ffffff;
+      box-shadow: 0 2px 6px rgba(10, 61, 98, 0.06);
+    }
+
+    .topbar {
+      background: #f8f9fb;
+      color: #475569;
+      font-size: 14px;
+    }
+
+    .btn-get-started {
+      background: var(--nusa-dark);
+      color: #fff;
+      border-radius: 6px;
+      padding: 10px 18px;
+      display: inline-block;
+      transition: all 0.3s ease;
+    }
+
+    .btn-get-started:hover {
+      background: var(--nusa-light);
+      color: #fff;
+    }
+
+    .hero.section {
+      background: linear-gradient(180deg, #ffffff 0%, #f5f8fb 100%);
+    }
+
+    .section-title h2 {
+      color: var(--nusa-dark);
+    }
+
+    .service-item .icon {
+      color: var(--nusa-light);
+    }
+
+    footer {
+      background: #fbfdff;
+      color: #45505b;
+    }
+
+    .social-links a {
+      color: var(--nusa-dark);
+      transition: all 0.3s ease;
+    }
+
+    a {
+      color: var(--nusa-dark);
+    }
+
+    .page-section {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .page-section.active {
+      display: block;
+      opacity: 1;
+    }
+
+    .page-title {
+      background: linear-gradient(135deg, #0A3D62 0%, #3498DB 100%);
+      color: white;
+      padding: 60px 0 40px;
+    }
+
+    .page-title h1 {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .page-title p {
+      font-size: 18px;
+      opacity: 0.9;
+    }
+
+    .breadcrumbs {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px 0;
+      margin-top: 30px;
+    }
+
+    .breadcrumbs ol {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .breadcrumbs li {
+      display: inline;
+      color: white;
+    }
+
+    .breadcrumbs li a {
+      color: #FFE082;
+    }
+
+    .breadcrumbs li:before {
+      content: " / ";
+      margin: 0 8px;
+    }
+
+    .breadcrumbs li:first-child:before {
+      content: none;
+    }
+
+    .breadcrumbs li.current {
+      color: #FFE082;
+    }
+
+    .info-box {
+      transition: all 0.3s ease;
+    }
+
+    .info-box:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 16px rgba(10, 61, 98, 0.15);
+    }
+
+    .team-member {
+      text-align: center;
+      background: #f8f9fb;
+      padding: 20px;
+      border-radius: 8px;
+    }
+
+    .team-member img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 16px;
+    }
+
+    .team-member h4 {
+      color: var(--nusa-dark);
+      margin-top: 12px;
+    }
+
+    .team-member span {
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+
+    .dropdown-section {
+      background: #f8fafc;
+      padding: 40px 0;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .dropdown-form {
+      background: white;
+      padding: 32px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(10, 61, 98, 0.08);
+    }
+
+    .form-group-custom {
+      margin-bottom: 24px;
+    }
+
+    .form-label-custom {
+      display: block;
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--nusa-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .form-select-custom {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid var(--border-color);
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: inherit;
+      transition: all 0.3s ease;
+      color: var(--text-primary);
+      background: white;
+    }
+
+    .form-select-custom:hover {
+      border-color: var(--nusa-light);
+    }
+
+    .form-select-custom:focus {
+      outline: none;
+      border-color: var(--nusa-light);
+      box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+    }
+
+    .result-box {
+      background: #f0f9ff;
+      padding: 20px;
+      border-radius: 8px;
+      border-left: 4px solid var(--nusa-light);
+      margin-top: 24px;
+      display: none;
+      animation: slideInUp 0.4s ease-out;
+    }
+
+    .result-box.show {
+      display: block;
+    }
+
+    .result-box h4 {
+      color: var(--nusa-dark);
+      margin-bottom: 8px;
+    }
+
+    .result-text {
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideInDown {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .welcome-card,
+      .welcome-banner {
+        padding: 28px 20px;
+      }
+
+      .welcome-title {
+        font-size: 24px;
+      }
+
+      .nusanet-logo {
+        width: 48px;
+        height: 48px;
+        font-size: 24px;
+      }
+
+      /* revert to column on small screens for better layout */
+      .welcome-team {
+        gap: 16px;
+        margin: 24px 0;
+        padding: 16px 0;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .welcome-team-card {
+        width: 240px; /* adjusted for mobile */
+        padding: 12px;
+      }
+
+      .welcome-team-photo {
+        width: 140px; /* adjusted for mobile */
+        height: 140px; /* adjusted for mobile */
+      }
+
+      .page-title h1 {
+        font-size: 26px;
+      }
+
+      .page-title p {
+        font-size: 14px;
+      }
+    }
+
+    /* ===== DIVISI SECTION STYLES ===== */
+    /* ===== ORGANIZATIONAL STRUCTURE ===== */
+    .org-structure {
+      background: #f8fafc;
+      padding: 40px 0;
+    }
+
+    .org-chart {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .org-divisi {
+      background: white;
+      border-radius: 12px;
+      padding: 28px;
+      box-shadow: 0 2px 8px rgba(10, 61, 98, 0.06);
+      border-left: 5px solid var(--nusa-light);
+    }
+
+    .divisi-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .divisi-header h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--nusa-dark);
+    }
+
+    .divisi-members {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 20px;
+      justify-items: center;
+    }
+
+    .member-card {
+      text-align: center;
+      padding: 16px;
+      border-radius: 10px;
+      background: #f0f4f8;
+      transition: all 0.3s ease;
+      width: 100%;
+      max-width: 160px;
+    }
+
+    .member-card:hover {
+      box-shadow: 0 4px 12px rgba(10, 61, 98, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .member-photo {
+      width: 100px;
+      height: 100px;
+      border-radius: 10px;
+      object-fit: cover;
+      display: block;
+      margin: 0 auto 12px;
+      border: 3px solid var(--nusa-light);
+    }
+
+    /* ===== DIVISION TEAM GRID ===== */
+    .division-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 24px;
+      padding: 0;
+    }
+
+    .division-card {
+      background: white;
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(10, 61, 98, 0.06);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .division-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 20px rgba(10, 61, 98, 0.12);
+    }
+
+    .division-photo {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 12px;
+      border: 2px solid var(--border-color);
+    }
+
+    .division-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--nusa-dark);
+      margin: 12px 0 4px 0;
+    }
+
+    .division-dept {
+      font-size: 12px;
+      color: var(--text-secondary);
+      font-weight: 500;
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 1024px) {
+      .division-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 20px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .division-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+
+      .division-card {
+        padding: 12px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .division-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+    }
+  </style>
+</head>
+
+<body class="index-page">
+
+  <header id="header" class="header sticky-top">
+    <div class="topbar d-flex align-items-center">
+      <div class="container d-flex justify-content-center justify-content-md-between">
+        <div class="contact-info d-flex align-items-center">
+          <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:info@nusa.net.id">info@nusa.net.id</a></i>
+          <i class="bi bi-phone d-flex align-items-center ms-4"><span>+62 61 8229 0000</span></i>
+        </div>
+        <div class="social-links d-none d-md-flex align-items-center">
+          <a href="#" class="brand-logo" title="Nusa.id"><img src="assets/img/logos/logo-nusa-id.png" alt="Nusa.id" style="height:24px;"></a>
+          <a href="#" class="brand-logo" title="Nusanet"><img src="assets/img/logos/logo-nusanet.png" alt="Nusanet" style="height:24px;"></a>
+          <a href="#" class="brand-logo" title="Nusawork"><img src="assets/img/logos/logo-nusawork.png" alt="Nusawork" style="height:24px;"></a>
+          <a href="#" class="brand-logo" title="Google Cloud Partner"><img src="assets/img/logos/logo-googlecloudpartner.png" alt="Google Cloud Partner" style="height:24px;"></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="branding d-flex align-items-center">
+      <div class="container position-relative d-flex align-items-center justify-content-between">
+        <a href="javascript:showSection('home')" class="logo d-flex align-items-center">
+          <h1 class="sitename">Nusanet</h1>
+        </a>
+
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li><a href="javascript:showSection('home')" class="active">Home</a></li>
+            <li><a href="javascript:showSection('about')">Tentang Kami</a></li>
+            <li><a href="javascript:showSection('services')">Layanan</a></li>
+            <li><a href="javascript:showSection('information')">Informasi</a></li>
+            <li><a href="javascript:showSection('team')">Tim Kami</a></li>
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- ===== HOME SECTION ===== -->
+    <section id="home-section" class="page-section active">
+      <section id="hero" class="hero section dark-background">
+        <div id="hero-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+          <div class="carousel-item active">
+            <img src="assets/img/hero-carousel/hero-carousel-1.jpg" alt="" style="object-fit:cover; width:100%; height:480px;">
+            <div class="carousel-container">
+              <h2>Solusi Internet Cepat dan Handal untuk Bisnis dan Rumah Anda</h2>
+              <p>Nusanet menyediakan layanan internet fiber optic berkualitas tinggi, paket bisnis, serta solusi jaringan dan cloud yang dirancang untuk meningkatkan produktivitas dan konektivitas Anda.</p>
+              <a href="javascript:showSection('services')" class="btn-get-started">Pelajari Lebih Lanjut</a>
+            </div>
+          </div>
+          <a class="carousel-control-prev" href="#hero-carousel" role="button" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+          </a>
+          <a class="carousel-control-next" href="#hero-carousel" role="button" data-bs-slide="next">
+            <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+          </a>
+        </div>
+      </section>
+
+      <!-- ===== WELCOME OVERLAY FORM ===== -->
+      <div id="welcomeOverlay" role="dialog" aria-modal="true">
+        <div class="welcome-container">
+          <div class="welcome-card">
+            <div class="welcome-header">
+              <div class="nusanet-logo">N</div>
+              <h2 class="welcome-title">Selamat Datang di Nusanet</h2>
+              <p class="welcome-subtitle">Bergabunglah dengan keluarga besar Nusanet</p>
+            </div>
+
+            <form id="welcomeForm" class="welcome-form">
+              <div class="form-group">
+                <label class="form-label" for="employeeName">Nama Lengkap</label>
+                <input id="employeeName" class="form-input" type="text" placeholder="Masukkan nama lengkap Anda" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="division">Pilih Divisi</label>
+                <select id="division" class="form-input" required>
+                  <option value="">-- Pilih Divisi --</option>
+                  <option value="Billing">Billing</option>
+                  <option value="BIS">BIS</option>
+                  <option value="Customer Experience">Customer Experience</option>
+                  <option value="Engineer Bali">Engineer Bali</option>
+                  <option value="Engineer Binjai">Engineer Binjai</option>
+                  <option value="Finance">Finance</option>
+                  <option value="Helpdesk">Helpdesk</option>
+                  <option value="HR & GA">HR & GA</option>
+                  <option value="HRIS">HRIS</option>
+                  <option value="Infra Cloud and POP">Infra Cloud and POP</option>
+                  <option value="Nusawork">Nusawork</option>
+                  <option value="Operasional">Operasional</option>
+                  <option value="POP">POP</option>
+                  <option value="Sales">Sales</option>
+                  <option value="Sales & Marketing Digital Business">Sales & Marketing Digital Business</option>
+                  <option value="Sales & Marketing Internet Access">Sales & Marketing Internet Access</option>
+                  <option value="Sales Access">Sales Access</option>
+                  <option value="Sales Bali A">Sales Bali A</option>
+                  <option value="Sales Bali B">Sales Bali B</option>
+                  <option value="Sales Binjai">Sales Binjai</option>
+                  <option value="Sales GWS">Sales GWS</option>
+                  <option value="Sales Medan A">Sales Medan A</option>
+                  <option value="Sales Medan B">Sales Medan B</option>
+                  <option value="Sales Medan C">Sales Medan C</option>
+                  <option value="Sales Medan D">Sales Medan D</option>
+                  <option value="Sales Medan F">Sales Medan F</option>
+                  <option value="Sales Nusawork">Sales Nusawork</option>
+                  <option value="Technical">Technical</option>
+                  <option value="Warehouse">Warehouse</option>
+                </select>
+              </div>
+
+              <button type="submit" class="btn-submit">Lanjutkan</button>
+            </form>
+
+            <p class="welcome-footer-text">© 2025 HR&GA Nusanet. All Rights Reserved.</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="bannerPlaceholder"></div>
+    </section>
+
+    <!-- ===== ABOUT SECTION ===== -->
+    <section id="about-section" class="page-section">
+      <section id="about" class="about section">
+        <div class="container section-title" data-aos="fade-up">
+          <h2>Tentang Kami</h2>
+          <p>Menjadi mitra konektivitas yang andal bagi bisnis dan rumah di Indonesia.</p>
+        </div>
+        <div class="container">
+          <div class="row gy-4">
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+              <h3>Nusanet: Penyedia Layanan Internet dan Solusi Jaringan</h3>
+              <img src="assets/img/about.jpg" class="img-fluid rounded-4 mb-4" alt="Tentang Nusanet">
+              <p>Nusanet adalah penyedia layanan internet (ISP) yang fokus pada koneksi fiber optic, layanan internet bisnis, dan solusi jaringan terkelola. Kami mengutamakan kecepatan, kestabilan, dan layanan pelanggan profesional.</p>
+              <p>Kami menawarkan instalasi cepat, dukungan teknis 24/7, dan solusi yang dapat disesuaikan untuk kebutuhan perusahaan maupun rumah tangga. Infrastruktur modern dan tim ahli kami siap membantu transformasi digital Anda.</p>
+            </div>
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="250">
+              <div class="content ps-0 ps-lg-5">
+                <p class="fst-italic">Komitmen kami adalah menyediakan akses internet yang cepat, aman, dan dapat diandalkan untuk semua pelanggan.</p>
+                <ul>
+                  <li><i class="bi bi-check-circle-fill"></i> <span>Koneksi fiber optic dengan uptime tinggi</span></li>
+                  <li><i class="bi bi-check-circle-fill"></i> <span>Paket bisnis dengan SLA dan dukungan prioritas</span></li>
+                  <li><i class="bi bi-check-circle-fill"></i> <span>Solusi jaringan & cloud terkelola untuk skala perusahaan</span></li>
+                </ul>
+                <p>Kami percaya bahwa konektivitas adalah fondasi produktivitas modern. Nusanet mendampingi Anda mulai dari perencanaan hingga pemeliharaan jaringan.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- ===== SERVICES SECTION ===== -->
+    <section id="services-section" class="page-section">
+      <section id="services" class="services section">
+        <div class="container section-title" data-aos="fade-up">
+          <h2>Layanan</h2>
+          <p>Solusi konektivitas yang dirancang untuk kebutuhan bisnis dan rumah Anda.</p>
+        </div>
+        <div class="container">
+          <div class="row gy-4">
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+              <div class="service-item position-relative">
+                <div class="icon"><i class="bi bi-building"></i></div>
+                <h3>Internet Bisnis</h3>
+                <p>Paket dedicated dan shared untuk perusahaan dengan SLA, IP statis, prioritas dukungan, dan solusi redundansi untuk ketersediaan tinggi.</p>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+              <div class="service-item position-relative">
+                <div class="icon"><i class="bi bi-house"></i></div>
+                <h3>Internet Rumah</h3>
+                <p>Paket fiber optic untuk rumahan dengan kecepatan beragam, instalasi profesional, dan dukungan pelanggan untuk pengalaman optimal.</p>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+              <div class="service-item position-relative">
+                <div class="icon"><i class="bi bi-cloud"></i></div>
+                <h3>Solusi Jaringan & Cloud</h3>
+                <p>Desain, implementasi, dan manajemen jaringan, VPN, firewall, serta solusi cloud untuk keamanan dan skalabilitas infrastruktur TI Anda.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- ===== INFORMATION SECTION ===== -->
+    <section id="information-section" class="page-section">
+      <div class="page-title" data-aos="fade">
+        <div class="heading">
+          <div class="container">
+            <div class="row d-flex justify-content-center text-center">
+              <div class="col-lg-8">
+                <h1>Kenapa Memilih Nusanet?</h1>
+                <p class="mb-0">Kami adalah mitra terpercaya untuk solusi konektivitas Anda</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="starter-section section">
+        <div class="container section-title" data-aos="fade-up">
+          <h2>Keunggulan Kompetitif</h2>
+          <p>Alasan mengapa ribuan pelanggan memilih Nusanet</p>
+        </div>
+        <div class="container" data-aos="fade-up">
+          <div class="row gy-4">
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+              <div class="info-box p-4 rounded-3" style="background: #f0f4f8; border-left: 4px solid #0A3D62;">
+                <h4 style="color: #0A3D62; margin-bottom: 16px;">
+                  <i class="bi bi-lightning-fill" style="color: #3498DB; margin-right: 8px;"></i>Teknologi Terdepan
+                </h4>
+                <p>Menggunakan fiber optic generasi terbaru dengan kecepatan hingga 1 Gbps dan latency minimal untuk performa optimal.</p>
+              </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+              <div class="info-box p-4 rounded-3" style="background: #f0f4f8; border-left: 4px solid #0A3D62;">
+                <h4 style="color: #0A3D62; margin-bottom: 16px;">
+                  <i class="bi bi-shield-check" style="color: #3498DB; margin-right: 8px;"></i>Keandalan Tinggi
+                </h4>
+                <p>Uptime guarantee 99.5% dengan SLA jelas dan dukungan teknis 24/7 siap membantu setiap saat.</p>
+              </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
+              <div class="info-box p-4 rounded-3" style="background: #f0f4f8; border-left: 4px solid #0A3D62;">
+                <h4 style="color: #0A3D62; margin-bottom: 16px;">
+                  <i class="bi bi-people-fill" style="color: #3498DB; margin-right: 8px;"></i>Tim Profesional
+                </h4>
+                <p>Tim ahli berpengalaman lebih dari 10 tahun di industri telekomunikasi siap memberikan solusi terbaik.</p>
+              </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
+              <div class="info-box p-4 rounded-3" style="background: #f0f4f8; border-left: 4px solid #0A3D62;">
+                <h4 style="color: #0A3D62; margin-bottom: 16px;">
+                  <i class="bi bi-graph-up" style="color: #3498DB; margin-right: 8px;"></i>Skalabilitas
+                </h4>
+                <p>Paket yang fleksibel dapat disesuaikan dengan kebutuhan bisnis Anda dari skala kecil hingga enterprise.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- ===== TEAM SECTION ===== -->
+    <section id="team-section" class="page-section">
+      <section id="team" class="team section">
+        <div class="container section-title" data-aos="fade-up">
+          <h2>Tim Kami</h2>
+          <p>Profesional berpengalaman dari berbagai divisi di Nusanet</p>
+        </div>
+        
+        <!-- Leadership Team -->
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+          <div class="row gy-5 mb-5">
+            <div class="col-xl-4 col-md-6 d-flex" data-aos="zoom-in" data-aos-delay="200">
+              <div class="team-member">
+                <img src="https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0209901%20-%20Anan%20Lowell%20(Anan).JPG?raw=true" class="img-fluid" alt="Aditya Putra">
+                <h4>Anan Lowell </h4>
+                <span>Direktur Utama</span>
+              </div>
+            </div>
+            <div class="col-xl-4 col-md-6 d-flex" data-aos="zoom-in" data-aos-delay="400">
+              <div class="team-member">
+                <img src="assets/img/team/team-2.jpg" class="img-fluid" alt="Sri Rahayu">
+                <h4>Sri Rahayu</h4>
+                <span>Head of Network</span>
+              </div>
+            </div>
+            <div class="col-xl-4 col-md-6 d-flex" data-aos="zoom-in" data-aos-delay="600">
+              <div class="team-member">
+                <img src="assets/img/team/team-3.jpg" class="img-fluid" alt="Budi Santoso">
+                <h4>Budi Santoso</h4>
+                <span>Lead Support Engineer</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Division Team Grid -->
+        <div class="container mt-5" data-aos="fade-up">
+          <h3 style="color: var(--nusa-dark); margin-bottom: 32px; text-align: center; font-weight: 700;">Tim per Divisi</h3>
+          <div class="division-grid">
+            
+            <!-- HR & GA -->
+            <div class="division-card" data-aos="fade-up" data-aos-delay="100">
+              <img src="https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0201101%20-%20Ramadina%20(Dina).jpeg?raw=true" alt="Karyawan HR & GA" class="division-photo">
+              <h5 class="division-name">Ramadina</h5>
+              <p class="division-dept">VP HR & GA</p>
+            </div>
+
+             <!-- Finance -->
+            <div class="division-card" data-aos="fade-up" data-aos-delay="100">
+              <img src="https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0200806%20-%20Linda%20(Linda).JPG?raw=true" alt="Karyawan Finance" class="division-photo">
+              <h5 class="division-name">Linda</h5>
+              <p class="division-dept">VP Finance</p>
+            </div>
+
+            <!-- Sales & Marketing Digital Business -->
+            <div class="division-card" data-aos="fade-up" data-aos-delay="100">
+              <img src="https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0200622%20-%20Ali%20Putera%20(Ali).JPG?raw=true" alt="Karyawan Sales & Marketing DB" class="division-photo">
+              <h5 class="division-name">Ali Putera</h5>
+              <p class="division-dept">VP Sales & Marketing Digital Bussines</p>
+            </div>
+
+            <!-- Infra Cloud and POP -->
+            <div class="division-card" data-aos="fade-up" data-aos-delay="100">
+              <img src="https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0200301%20-%20Agung%20Lumban%20Raja%20(Agung).JPG?raw=true" alt="Karyawan Infra Cloud" class="division-photo">
+              <h5 class="division-name">Agung Lumban Raja</h5>
+              <p class="division-dept">VP Infra Cloud & POP</p>
+            </div>
+
+            <!-- Billing -->
+            <div class="division-card" data-aos="fade-up" data-aos-delay="100">
+              <img src="https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0201920%20-%20Stella%20Angelica%20Maria%20S%20(Stella).JPG?raw=true" alt="Karyawan Billing" class="division-photo">
+              <h5 class="division-name">Stella</h5>
+              <p class="division-dept">Billing Manager</p>
+            </div>
+
+            <!-- BIS -->
+            <div class="division-card" data-aos="fade-up" data-aos-delay="100">
+              <img src="https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0201001%20-%20David%20(David).jpg?raw=true" alt="Karyawan BIS" class="division-photo">
+              <h5 class="division-name">David</h5>
+              <p class="division-dept">BIS Product Owner</p>
+            </div>
+
+            <!-- Customer Experience -->
+            <div class="division-card" data-aos="fade-up" data-aos-delay="100">
+              <img src="https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0201014%20-%20Hendra%20(Hendra).JPG?raw=true" alt="Karyawan Customer Experience" class="division-photo">
+              <h5 class="division-name">Hendra Hendra</h5>
+              <p class="division-dept">Customer Experience Senior Manager</p>
+            </div>
+
+            <!-- Engineer Bali -->
+            <div class="division-card" data-aos="fade-up" data-aos-delay="100">
+              <img src="https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0601623%20-%20Muhammad%20Syaifudin%20Zuhri%20(Huri).jpg?raw=true" alt="Karyawan Engineer Bali" class="division-photo">
+              <h5 class="division-name">Muhammad Syaifudin Zuhri</h5>
+              <p class="division-dept">Customer Engineer Manager Bali</p>
+            </div>
+
+            <!-- Engineer Binjai -->
+            <div class="division-card" data-aos="fade-up" data-aos-delay="100">
+              <img src="https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0202273%20-%20Febry%20Cahya%20Ramadani%20(Febry).JPG?raw=true" alt="Karyawan Engineer Binjai" class="division-photo">
+              <h5 class="division-name">Febry Cahya Ramadani</h5>
+              <p class="division-dept">Engineer Binjai</p>
+            </div>
+
+            <!-- Helpdesk -->
+            <div class="division-card" data-aos="fade-up" data-aos-delay="100">
+              <img src="https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0201402%20-%20Muhammad%20Al%20Ridho%20(Ridho).JPG?raw=true" alt="Karyawan Helpdesk" class="division-photo">
+              <h5 class="division-name">Muhammad Al Ridho</h5>
+              <p class="division-dept">Helpdesk Manager</p>
+            </div>
+
+            
+            <!-- HRIS -->
+            <div class="division-card" data-aos="fade-up" data-aos-delay="100">
+              <img src="https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0201011%20-%20Ade%20Iskandar%20(Ade).JPG?raw=true" alt="Karyawan HRIS" class="division-photo">
+              <h5 class="division-name">Ade Iskandar</h5>
+              <p class="division-dept">HRIS Product Owner</p>
+            </div>
+
+            <!-- Nusawork -->
+            <div class="division-card" data-aos="fade-up" data-aos-delay="100">
+              <img src="https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0202163%20-%20Teguh%20Dwi%20Putra%20(Teguh).JPG?raw=true" alt="Karyawan Nusawork" class="division-photo">
+              <h5 class="division-name">Teguh Dwi Putra</h5>
+              <p class="division-dept">Nusawork Product Manager</p>
+            </div>
+
+            <!-- POP -->
+            <div class="division-card" data-aos="fade-up" data-aos-delay="100">
+              <img src="https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0201233%20-%20Erwin%20Faisal%20Napitupulu%20(Erwin).JPG?raw=true" alt="Karyawan POP" class="division-photo">
+              <h5 class="division-name">Erwin Faisal Napitupulu </h5>
+              <p class="division-dept">POP Manager</p>
+            </div>
+
+            <!-- Sales -->
+            <div class="division-card" data-aos="fade-up" data-aos-delay="100">
+              <img src="https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0200519%20-%20M%20Syafi'i%20(Syafi'i).JPG?raw=true" alt="Karyawan Sales" class="division-photo">
+              <h5 class="division-name">M. Syafi'i</h5>
+              <p class="division-dept">Head Sales</p>
+            </div>
+
+            <!-- Sales & Marketing Internet Access -->
+            <div class="division-card" data-aos="fade-up" data-aos-delay="100">
+              <img src="https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0200925%20-%20Sovian%20Siregar%20(Sovian).JPG?raw=true" alt="Karyawan Sales & Marketing IA" class="division-photo">
+              <h5 class="division-name">Sovian Siregar</h5>
+              <p class="division-dept">Sales & Marketing Internet Acces</p>
+            </div>
+
+            <!-- Sales Bali B -->
+            <div class="division-card" data-aos="fade-up" data-aos-delay="100">
+              <img src="https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0202229%20-%20I%20Putu%20Agus%20Ari%20Wiweka%20(Ari).jpg?raw=true" alt="Karyawan Sales Bali B" class="division-photo">
+              <h5 class="division-name">I Putu Agus Ari Wiweka, ST</h5>
+              <p class="division-dept">Sales Manager Bali</p>
+            </div>
+
+            <!-- Sales Medan A -->
+            <div class="division-card" data-aos="fade-up" data-aos-delay="100">
+              <img src="https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0201005%20-%20Budiman%20Silalahi%20(Budiman).JPG?raw=true" alt="Karyawan Sales Medan A" class="division-photo">
+              <h5 class="division-name">Budiman Silalahi</h5>
+              <p class="division-dept">Sales Manager Medan A</p>
+            </div>
+
+            <!-- Sales Medan B -->
+            <div class="division-card" data-aos="fade-up" data-aos-delay="100">
+              <img src="https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0201315%20-%20Rizki%20Hidayat%20(Rizki).JPG?raw=true" alt="Karyawan Sales Medan B" class="division-photo">
+              <h5 class="division-name">Rizki Hidayat</h5>
+              <p class="division-dept">Sales Manager Medan B</p>
+            </div>
+
+            <!-- Sales Medan C -->
+            <div class="division-card" data-aos="fade-up" data-aos-delay="100">
+              <img src="https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0201318%20-%20Jimmy%20Heryanto%20(Jimmy).JPG?raw=true" alt="Karyawan Sales Medan C" class="division-photo">
+              <h5 class="division-name">Jimmy Heryanto</h5>
+              <p class="division-dept">Sales Manager Medan C</p>
+            </div>
+
+            <!-- Sales Medan D -->
+            <div class="division-card" data-aos="fade-up" data-aos-delay="100">
+              <img src="https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0201516%20-%20Fani%20Hardianto%20(Fani).JPG?raw=true" alt="Karyawan Sales Medan D" class="division-photo">
+              <h5 class="division-name">Fani Hardianto</h5>
+              <p class="division-dept">Sales Manager Medan D</p>
+            </div>
+
+            <!-- Sales Medan F -->
+            <div class="division-card" data-aos="fade-up" data-aos-delay="100">
+              <img src="https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0202214%20-%20Fauzan%20(Fauzan).JPG?raw=true" alt="Karyawan Sales Medan F" class="division-photo">
+              <h5 class="division-name">Fauzan</h5>
+              <p class="division-dept">Sales Manager Medan F</p>
+            </div>
+
+            <!-- Technical -->
+            <div class="division-card" data-aos="fade-up" data-aos-delay="100">
+              <img src="https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0200306%20-%20Wardi%20(Wardi).JPG?raw=true" alt="Karyawan Technical" class="division-photo">
+              <h5 class="division-name">Wardi</h5>
+              <p class="division-dept">VP Technical</p>
+            </div>
+
+            <!-- Warehouse -->
+            <div class="division-card" data-aos="fade-up" data-aos-delay="100">
+              <img src="https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0202330%20-%20Steven%20(Steven)%20-%20.JPG?raw=true" alt="Karyawan Warehouse" class="division-photo">
+              <h5 class="division-name">Steven</h5>
+              <p class="division-dept">Warehouse Supervisor</p>
+            </div>
+
+          </div>
+        </div>
+
+      </section>
+    </section>
+
+    <!-- ===== CONTACT SECTION ===== -->
+    <section id="contact-section" class="page-section">
+      <section id="contact" class="contact section">
+        <div class="container section-title" data-aos="fade-up">
+          <h2>Hubungi Kami</h2>
+          <p>Siap membantu kebutuhan konektivitas Anda.</p>
+        </div>
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+          <div class="row gy-4">
+            <div class="col-lg-6">
+              <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="200">
+                <i class="bi bi-geo-alt"></i>
+                <h3>Alamat</h3>
+                <p>Jl. Haji Misbah Jl. Komp. Multatuli Indah No.1 Blok D, Kec. Medan Maimun, Kota Medan, Sumatera Utara 20151</p>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+              <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="300">
+                <i class="bi bi-telephone"></i>
+                <h3>Telepon</h3>
+                <p>+62 61 8229 0000</p>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+              <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="400">
+                <i class="bi bi-envelope"></i>
+                <h3>Email</h3>
+                <p>info@nusa.net.id</p>
+              </div>
+            </div>
+          </div>
+
+          <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="400">
+            <div class="row gy-4">
+              <div class="col-md-6"><input type="text" name="name" class="form-control" placeholder="Nama Anda" required></div>
+              <div class="col-md-6"><input type="email" class="form-control" name="email" placeholder="Email Anda" required></div>
+              <div class="col-md-12"><input type="text" class="form-control" name="subject" placeholder="Subjek" required></div>
+              <div class="col-md-12"><textarea class="form-control" name="message" rows="6" placeholder="Pesan" required></textarea></div>
+              <div class="col-md-12 text-center"><button type="submit">Kirim Pesan</button></div>
+            </div>
+          </form>
+        </div>
+      </section>
+    </section>
+
+  </main>
+
+  <footer id="footer" class="footer light-background">
+    <div class="container footer-top">
+      <div class="row gy-4">
+        <div class="col-lg-4 col-md-6 footer-about">
+          <a href="javascript:showSection('home')" class="logo d-flex align-items-center">
+            <span class="sitename">Nusanet</span>
+          </a>
+          <div class="footer-contact pt-3">
+            <p>Jl. Haji Misbah Jl. Komp. Multatuli Indah No.1 Blok D</p>
+            <p>Kec. Medan Maimun, Kota Medan, Sumatera Utara 20151</p>
+            <p class="mt-3"><strong>Phone:</strong> <span>+62 61 8229 0000</span></p>
+            <p><strong>Email:</strong> <span>info@nusa.net.id</span></p>
+          </div>
+          <div class="social-links d-flex mt-4">
+            <a href="#"><i class="bi bi-twitter"></i></a>
+            <a href="#"><i class="bi bi-facebook"></i></a>
+            <a href="#"><i class="bi bi-instagram"></i></a>
+            <a href="#"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Menu</h4>
+          <ul>
+            <li><a href="javascript:showSection('home')">Home</a></li>
+            <li><a href="javascript:showSection('about')">Tentang Kami</a></li>
+            <li><a href="javascript:showSection('services')">Layanan</a></li>
+            <li><a href="javascript:showSection('team')">Tim Kami</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Layanan Utama</h4>
+          <ul>
+            <li><a href="javascript:showSection('services')">Internet Bisnis</a></li>
+            <li><a href="javascript:showSection('services')">Internet Rumah</a></li>
+            <li><a href="javascript:showSection('services')">Jaringan & Cloud</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-4 col-md-6 footer-newsletter">
+          <h4>Newsletter</h4>
+          <p>Dapatkan update terbaru tentang paket dan promosi Nusanet.</p>
+          <form action="" method="post">
+            <input type="email" name="email">
+            <input type="submit" value="Berlangganan">
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="container copyright text-center mt-4">
+      <p>© 2025 HR&GA Nusanet. All Rights Reserved.</p>
+      <div class="credits">Designed by <a href="https://www.linkedin.com/in/alwis-ginting/">Alwis Ginting</a></div>
+    </div>
+  </footer>
+
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <div id="preloader"></div>
+
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+
+  <script>
+   // ===== UPDATED DIVISION DATA =====
+const divisionData = {
+  'Billing': {
+    vice_president: 'Stella Angelica Maria S',
+    buddy: 'Evelyn',
+    vpImage: 'https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0201920%20-%20Stella%20Angelica%20Maria%20S%20(Stella).JPG?raw=true',
+    buddyImage: 'https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0202505-Evelyn%20Shinta%20Situmorang%20(Evelyn).jpeg?raw=true',
+    vpPhone: '+62 61 8229 0001',
+    vpEmail: 'stella@nusa.net.id',
+    buddyPhone: '+62 812-1062-1990',
+    buddyEmail: 'evelyn@nusa.net.id',
+    vpDesc: 'Beliau adalah Manager Billing yang siap membantu Anda dalam posisi baru Anda.',
+    buddyDesc: 'Beliau adalah Buddy/Sobat Anda yang akan membimbing Anda serta memudahkan Anda untuk beradaptasi di lingkungan Perusahaan selama 2 bulan.'
+  },
+  'BIS': {
+    vice_president: 'David',
+    buddy: 'Fahmi Siregar',
+    vpImage: 'https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0201001%20-%20David%20(David).jpg?raw=true',
+    buddyImage: 'assets/img/team/buddy.jpg',
+    vpPhone: '+62 61 8229 0003',
+    vpEmail: 'david@nusa.net.id',
+    buddyPhone: '+62 61 8229 0004',
+    buddyEmail: 'fahmi@nusa.net.id',
+    vpDesc: 'Beliau adalah Product Owner BIS yang siap membantu Anda dalam posisi baru Anda.',
+    buddyDesc: 'Beliau adalah Buddy/Sobat Anda yang akan membimbing Anda serta memudahkan Anda untuk beradaptasi di lingkungan Perusahaan selama 2 bulan.'
+  },
+  'Customer Experience': {
+    vice_president: 'Hendra Hendra',
+    buddy: 'Sarah Amelia',
+    vpImage: 'https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0201014%20-%20Hendra%20(Hendra).JPG?raw=true',
+    buddyImage: 'assets/img/team/buddy.jpg',
+    vpPhone: '+62 61 8229 0005',
+    vpEmail: 'hendra@nusa.net.id',
+    buddyPhone: '+62 61 8229 0006',
+    buddyEmail: 'sarah@nusa.net.id',
+    vpDesc: 'Beliau adalah Senior Manager Customer Experience yang siap membantu Anda dalam posisi baru Anda.',
+    buddyDesc: 'Beliau adalah Buddy/Sobat Anda yang akan membimbing Anda serta memudahkan Anda untuk beradaptasi di lingkungan Perusahaan selama 2 bulan.'
+  },
+  'Engineer Bali': {
+    vice_president: 'Muhammad Syaifudin Zuhri',
+    buddy: 'Kadek Aris',
+    vpImage: 'https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0601623%20-%20Muhammad%20Syaifudin%20Zuhri%20(Huri).jpg?raw=true',
+    buddyImage: 'assets/img/team/buddy.jpg',
+    vpPhone: '+62 361 8229 0001',
+    vpEmail: 'huri@nusa.net.id',
+    buddyPhone: '+62 361 8229 0002',
+    buddyEmail: 'kadek.aris@nusa.net.id',
+    vpDesc: 'Beliau adalah Customer Engineer Manager Bali yang siap membantu Anda dalam posisi baru Anda.',
+    buddyDesc: 'Beliau adalah Buddy/Sobat Anda yang akan membimbing Anda serta memudahkan Anda untuk beradaptasi di lingkungan Perusahaan selama 2 bulan.'
+  },
+  'Engineer Binjai': {
+    vice_president: 'Febry Cahya Ramadani',
+    buddy: 'Deni Saputra',
+    vpImage: 'https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0202273%20-%20Febry%20Cahya%20Ramadani%20(Febry).JPG?raw=true',
+    buddyImage: 'assets/img/team/buddy.jpg',
+    vpPhone: '+62 61 8229 0007',
+    vpEmail: 'febry@nusa.net.id',
+    buddyPhone: '+62 61 8229 0008',
+    buddyEmail: 'deni@nusa.net.id',
+    vpDesc: 'Beliau adalah Engineer Binjai yang siap membantu Anda dalam posisi baru Anda.',
+    buddyDesc: 'Beliau adalah Buddy/Sobat Anda yang akan membimbing Anda serta memudahkan Anda untuk beradaptasi di lingkungan Perusahaan selama 2 bulan.'
+  },
+  'Finance': {
+    vice_president: 'Linda',
+    buddy: 'Andi Pratama',
+    vpImage: 'https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0200806%20-%20Linda%20(Linda).JPG?raw=true',
+    buddyImage: 'assets/img/team/buddy.jpg',
+    vpPhone: '+62 61 8229 0009',
+    vpEmail: 'linda@nusa.net.id',
+    buddyPhone: '+62 61 8229 0010',
+    buddyEmail: 'andi@nusa.net.id',
+    vpDesc: 'Beliau adalah VP Finance yang siap membantu Anda dalam posisi baru Anda.',
+    buddyDesc: 'Beliau adalah Buddy/Sobat Anda yang akan membimbing Anda serta memudahkan Anda untuk beradaptasi di lingkungan Perusahaan selama 2 bulan.'
+  },
+  'Helpdesk': {
+    vice_president: 'Muhammad Al Ridho',
+    buddy: 'Rani Oktavia',
+    vpImage: 'https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0201402%20-%20Muhammad%20Al%20Ridho%20(Ridho).JPG?raw=true',
+    buddyImage: 'assets/img/team/buddy.jpg',
+    vpPhone: '+62 61 8229 0011',
+    vpEmail: 'ridho@nusa.net.id',
+    buddyPhone: '+62 61 8229 0012',
+    buddyEmail: 'rani@nusa.net.id',
+    vpDesc: 'Beliau adalah Manager Helpdesk yang siap membantu Anda dalam posisi baru Anda.',
+    buddyDesc: 'Beliau adalah Buddy/Sobat Anda yang akan membimbing Anda serta memudahkan Anda untuk beradaptasi di lingkungan Perusahaan selama 2 bulan.'
+  },
+  'HR & GA': {
+    vice_president: 'Ramadina',
+    buddy: 'Indah Rahayu SP',
+    vpImage: 'https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0201101%20-%20Ramadina%20(Dina).jpeg?raw=true',
+    buddyImage: 'https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0200934%20-%20Indah%20Rahayu%20Suryono%20Putri%20(Indah).jpeg?raw=true',
+    vpPhone: '+62 61 8229 0013',
+    vpEmail: 'ramadina@nusa.net.id',
+    buddyPhone: '+62 61 8229 0014',
+    buddyEmail: 'indah@nusa.net.id',
+    vpDesc: 'Beliau adalah VP HR & GA yang siap membantu Anda dalam posisi baru Anda.',
+    buddyDesc: 'Beliau adalah Buddy/Sobat Anda yang akan membimbing Anda serta memudahkan Anda untuk beradaptasi di lingkungan Perusahaan selama 2 bulan.'
+  },
+  'HRIS': {
+    vice_president: 'Ade Iskandar',
+    buddy: 'Siti Nurhaliza',
+    vpImage: 'https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0201011%20-%20Ade%20Iskandar%20(Ade).JPG?raw=true',
+    buddyImage: 'assets/img/team/buddy.jpg',
+    vpPhone: '+62 61 8229 0015',
+    vpEmail: 'ade@nusa.net.id',
+    buddyPhone: '+62 61 8229 0016',
+    buddyEmail: 'siti@nusa.net.id',
+    vpDesc: 'Beliau adalah Product Owner HRIS yang siap membantu Anda dalam posisi baru Anda.',
+    buddyDesc: 'Beliau adalah Buddy/Sobat Anda yang akan membimbing Anda serta memudahkan Anda untuk beradaptasi di lingkungan Perusahaan selama 2 bulan.'
+  },
+  'Infra Cloud and POP': {
+    vice_president: 'Agung Lumban Raja',
+    buddy: 'Oky Firmansyah',
+    vpImage: 'https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0200301%20-%20Agung%20Lumban%20Raja%20(Agung).JPG?raw=true',
+    buddyImage: 'assets/img/team/buddy.jpg',
+    vpPhone: '+62 61 8229 0017',
+    vpEmail: 'agung@nusa.net.id',
+    buddyPhone: '+62 61 8229 0018',
+    buddyEmail: 'oky@nusa.net.id',
+    vpDesc: 'Beliau adalah VP Infra Cloud & POP yang siap membantu Anda dalam posisi baru Anda.',
+    buddyDesc: 'Beliau adalah Buddy/Sobat Anda yang akan membimbing Anda serta memudahkan Anda untuk beradaptasi di lingkungan Perusahaan selama 2 bulan.'
+  },
+  'Nusawork': {
+    vice_president: 'Teguh Dwi Putra',
+    buddy: 'Maria Theresia',
+    vpImage: 'https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0202163%20-%20Teguh%20Dwi%20Putra%20(Teguh).JPG?raw=true',
+    buddyImage: 'assets/img/team/buddy.jpg',
+    vpPhone: '+62 61 8229 0019',
+    vpEmail: 'teguh@nusa.net.id',
+    buddyPhone: '+62 61 8229 0020',
+    buddyEmail: 'maria@nusa.net.id',
+    vpDesc: 'Beliau adalah Product Manager Nusawork yang siap membantu Anda dalam posisi baru Anda.',
+    buddyDesc: 'Beliau adalah Buddy/Sobat Anda yang akan membimbing Anda serta memudahkan Anda untuk beradaptasi di lingkungan Perusahaan selama 2 bulan.'
+  },
+  'Operasional': {
+    vice_president: 'Hendra Wijaya',
+    buddy: 'Ratna Kusuma',
+    vpImage: 'assets/img/team/leader.jpg',
+    buddyImage: 'assets/img/team/buddy.jpg',
+    vpPhone: '+62 61 8229 0021',
+    vpEmail: 'hendra.wijaya@nusa.net.id',
+    buddyPhone: '+62 61 8229 0022',
+    buddyEmail: 'ratna@nusa.net.id',
+    vpDesc: 'Beliau adalah Head of Operasional yang siap membantu Anda dalam posisi baru Anda.',
+    buddyDesc: 'Beliau adalah Buddy/Sobat Anda yang akan membimbing Anda serta memudahkan Anda untuk beradaptasi di lingkungan Perusahaan selama 2 bulan.'
+  },
+  'POP': {
+    vice_president: 'Erwin Faisal Napitupulu',
+    buddy: 'Bayu Rahmat',
+    vpImage: 'https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0201233%20-%20Erwin%20Faisal%20Napitupulu%20(Erwin).JPG?raw=true',
+    buddyImage: 'assets/img/team/buddy.jpg',
+    vpPhone: '+62 61 8229 0023',
+    vpEmail: 'erwin@nusa.net.id',
+    buddyPhone: '+62 61 8229 0024',
+    buddyEmail: 'bayu@nusa.net.id',
+    vpDesc: 'Beliau adalah Manager POP yang siap membantu Anda dalam posisi baru Anda.',
+    buddyDesc: 'Beliau adalah Buddy/Sobat Anda yang akan membimbing Anda serta memudahkan Anda untuk beradaptasi di lingkungan Perusahaan selama 2 bulan.'
+  },
+  'Sales': {
+    vice_president: 'M. Syafi\'i',
+    buddy: 'Siti Wahyuni',
+    vpImage: 'https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0200519%20-%20M%20Syafi%27i%20(Syafi%27i).JPG?raw=true',
+    buddyImage: 'assets/img/team/buddy.jpg',
+    vpPhone: '+62 61 8229 0025',
+    vpEmail: 'syafii@nusa.net.id',
+    buddyPhone: '+62 61 8229 0026',
+    buddyEmail: 'siti.wahyuni@nusa.net.id',
+    vpDesc: 'Beliau adalah Head of Sales yang siap membantu Anda dalam posisi baru Anda.',
+    buddyDesc: 'Beliau adalah Buddy/Sobat Anda yang akan membimbing Anda serta memudahkan Anda untuk beradaptasi di lingkungan Perusahaan selama 2 bulan.'
+  },
+  'Sales & Marketing Digital Business': {
+    vice_president: 'Ali Putera',
+    buddy: 'Sylvia Amelia',
+    vpImage: 'https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0200622%20-%20Ali%20Putera%20(Ali).JPG?raw=true',
+    buddyImage: 'assets/img/team/buddy.jpg',
+    vpPhone: '+62 61 8229 0027',
+    vpEmail: 'ali@nusa.net.id',
+    buddyPhone: '+62 61 8229   0028',
+    buddyEmail: 'sylvia@nusa.net.id',
+    vpDesc: 'Beliau adalah VP Sales & Marketing Digital Business yang siap membantu Anda dalam posisi baru Anda.',
+    buddyDesc: 'Beliau adalah Buddy/Sobat Anda yang akan membimbing Anda serta memudahkan Anda untuk beradaptasi di lingkungan Perusahaan selama 2 bulan.'
+  },
+  'Sales & Marketing Internet Access': {
+    vice_president: 'Sovian Siregar',
+    buddy: 'Mega Lestari',
+    vpImage: 'https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0200925%20-%20Sovian%20Siregar%20(Sovian).JPG?raw=true',
+    buddyImage: 'assets/img/team/buddy.jpg',
+    vpPhone: '+62 61 8229 0029',
+    vpEmail: 'sovian@nusa.net.id',
+    buddyPhone: '+62 61 8229 0030',
+    buddyEmail: 'mega@nusa.net.id',
+    vpDesc: 'Beliau adalah VP Sales & Marketing Internet Access yang siap membantu Anda dalam posisi baru Anda.',
+    buddyDesc: 'Beliau adalah Buddy/Sobat Anda yang akan membimbing Anda serta memudahkan Anda untuk beradaptasi di lingkungan Perusahaan selama 2 bulan.'
+  },
+  'Sales Access': {
+    vice_president: 'Taufik Syarif',
+    buddy: 'Dina Permata',
+    vpImage: 'assets/img/team/leader.jpg',
+    buddyImage: 'assets/img/team/buddy.jpg',
+    vpPhone: '+62 61 8229 0031',
+    vpEmail: 'taufik@nusa.net.id',
+    buddyPhone: '+62 61 8229 0032',
+    buddyEmail: 'dina@nusa.net.id',
+    vpDesc: 'Beliau adalah Head Sales Access yang siap membantu Anda dalam posisi baru Anda.',
+    buddyDesc: 'Beliau adalah Buddy/Sobat Anda yang akan membimbing Anda serta memudahkan Anda untuk beradaptasi di lingkungan Perusahaan selama 2 bulan.'
+  },
+  'Sales Bali A': {
+    vice_president: 'Made Yudiana',
+    buddy: 'Kadek Sasmita',
+    vpImage: 'assets/img/team/leader.jpg',
+    buddyImage: 'assets/img/team/buddy.jpg',
+    vpPhone: '+62 361 8229 0003',
+    vpEmail: 'made.yudiana@nusa.net.id',
+    buddyPhone: '+62 361 8229 0004',
+    buddyEmail: 'kadek.sasmita@nusa.net.id',
+    vpDesc: 'Beliau adalah Sales Manager Bali A yang siap membantu Anda dalam posisi baru Anda.',
+    buddyDesc: 'Beliau adalah Buddy/Sobat Anda yang akan membimbing Anda serta memudahkan Anda untuk beradaptasi di lingkungan Perusahaan selama 2 bulan.'
+  },
+  'Sales Bali B': {
+    vice_president: 'I Putu Agus Ari Wiweka',
+    buddy: 'Putu Wirawan',
+    vpImage: 'https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0202229%20-%20I%20Putu%20Agus%20Ari%20Wiweka%20(Ari).jpg?raw=true',
+    buddyImage: 'assets/img/team/buddy.jpg',
+    vpPhone: '+62 361 8229 0005',
+    vpEmail: 'ari@nusa.net.id',
+    buddyPhone: '+62 361 8229 0006',
+    buddyEmail: 'putu.wirawan@nusa.net.id',
+    vpDesc: 'Beliau adalah Sales Manager Bali B yang siap membantu Anda dalam posisi baru Anda.',
+    buddyDesc: 'Beliau adalah Buddy/Sobat Anda yang akan membimbing Anda serta memudahkan Anda untuk beradaptasi di lingkungan Perusahaan selama 2 bulan.'
+  },
+  'Sales Binjai': {
+    vice_president: 'Ridho Prasetya',
+    buddy: 'Sari Melina',
+    vpImage: 'assets/img/team/leader.jpg',
+    buddyImage: 'assets/img/team/buddy.jpg',
+    vpPhone: '+62 520 8229 0001',
+    vpEmail: 'ridho.prasetya@nusa.net.id',
+    buddyPhone: '+62 520 8229 0002',
+    buddyEmail: 'sari@nusa.net.id',
+    vpDesc: 'Beliau adalah Sales Manager Binjai yang siap membantu Anda dalam posisi baru Anda.',
+    buddyDesc: 'Beliau adalah Buddy/Sobat Anda yang akan membimbing Anda serta memudahkan Anda untuk beradaptasi di lingkungan Perusahaan selama 2 bulan.'
+  },
+  'Sales GWS': {
+    vice_president: 'Agus Supriyadi',
+    buddy: 'Wulan Astari',
+    vpImage: 'assets/img/team/leader.jpg',
+    buddyImage: 'assets/img/team/buddy.jpg',
+    vpPhone: '+62 61 8229 0033',
+    vpEmail: 'agus.supriyadi@nusa.net.id',
+    buddyPhone: '+62 61 8229 0034',
+    buddyEmail: 'wulan@nusa.net.id',
+    vpDesc: 'Beliau adalah Head Sales GWS yang siap membantu Anda dalam posisi baru Anda.',
+    buddyDesc: 'Beliau adalah Buddy/Sobat Anda yang akan membimbing Anda serta memudahkan Anda untuk beradaptasi di lingkungan Perusahaan selama 2 bulan.'
+  },
+  'Sales Medan A': {
+    vice_president: 'Budiman Silalahi',
+    buddy: 'Sandra Putri',
+    vpImage: 'https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0201005%20-%20Budiman%20Silalahi%20(Budiman).JPG?raw=true',
+    buddyImage: 'assets/img/team/buddy.jpg',
+    vpPhone: '+62 61 8229 0035',
+    vpEmail: 'budiman@nusa.net.id',
+    buddyPhone: '+62 61 8229 0036',
+    buddyEmail: 'sandra@nusa.net.id',
+    vpDesc: 'Beliau adalah Sales Manager Medan A yang siap membantu Anda dalam posisi baru Anda.',
+    buddyDesc: 'Beliau adalah Buddy/Sobat Anda yang akan membimbing Anda serta memudahkan Anda untuk beradaptasi di lingkungan Perusahaan selama 2 bulan.'
+  },
+  'Sales Medan B': {
+    vice_president: 'Rizki Hidayat',
+    buddy: 'Gompis Felix Christian Purba (Freddy)',
+    vpImage: 'https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0201315%20-%20Rizki%20Hidayat%20(Rizki).JPG?raw=true',
+    buddyImage: 'assets/img/team/buddy.jpg',
+    vpPhone: '+62 812-6395-9758',
+    vpEmail: 'rizki@nusa.net.id',
+    buddyPhone: '+62 812-7614-4650',
+    buddyEmail: 'gompis@nusa.net.id',
+    vpDesc: 'Beliau adalah Sales Manager Medan B yang siap membantu Anda dalam posisi baru Anda.',
+    buddyDesc: 'Beliau adalah Buddy/Sobat Anda yang akan membimbing Anda serta memudahkan Anda untuk beradaptasi di lingkungan Perusahaan selama 2 bulan.'
+  },
+  'Sales Medan C': {
+    vice_president: 'Jimmy Heryanto',
+    buddy: 'Riska Sembiring',
+    vpImage: 'https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0201318%20-%20Jimmy%20Heryanto%20(Jimmy).JPG?raw=true',
+    buddyImage: 'assets/img/team/buddy.jpg',
+    vpPhone: '+62 61 8229 0039',
+    vpEmail: 'jimmy@nusa.net.id',
+    buddyPhone: '+62 61 8229 0040',
+    buddyEmail: 'riska@nusa.net.id',
+    vpDesc: 'Beliau adalah Sales Manager Medan C yang siap membantu Anda dalam posisi baru Anda.',
+    buddyDesc: 'Beliau adalah Buddy/Sobat Anda yang akan membimbing Anda serta memudahkan Anda untuk beradaptasi di lingkungan Perusahaan selama 2 bulan.'
+  },
+  'Sales Medan D': {
+    vice_president: 'Fani Hardianto',
+    buddy: 'Lisa Br Ginting',
+    vpImage: 'https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0201516%20-%20Fani%20Hardianto%20(Fani).JPG?raw=true',
+    buddyImage: 'assets/img/team/buddy.jpg',
+    vpPhone: '+62 61 8229 0041',
+    vpEmail: 'fani@nusa.net.id',
+    buddyPhone: '+62 61 8229 0042',
+    buddyEmail: 'lisa@nusa.net.id',
+    vpDesc: 'Beliau adalah Sales Manager Medan D yang siap membantu Anda dalam posisi baru Anda.',
+    buddyDesc: 'Beliau adalah Buddy/Sobat Anda yang akan membimbing Anda serta memudahkan Anda untuk beradaptasi di lingkungan Perusahaan selama 2 bulan.'
+  },
+  'Sales Medan F': {
+    vice_president: 'Fauzan',
+    buddy: 'Maya Harahap',
+    vpImage: 'https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0202214%20-%20Fauzan%20(Fauzan).JPG?raw=true',
+    buddyImage: 'assets/img/team/buddy.jpg',
+    vpPhone: '+62 61 8229 0043',
+    vpEmail: 'fauzan@nusa.net.id',
+    buddyPhone: '+62 61 8229 0044',
+    buddyEmail: 'maya@nusa.net.id',
+    vpDesc: 'Beliau adalah Sales Manager Medan F yang siap membantu Anda dalam posisi baru Anda.',
+    buddyDesc: 'Beliau adalah Buddy/Sobat Anda yang akan membimbing Anda serta memudahkan Anda untuk beradaptasi di lingkungan Perusahaan selama 2 bulan.'
+  },
+  'Sales Nusawork': {
+    vice_president: 'Jefry Manurung',
+    buddy: 'Cindy Natalia',
+    vpImage: 'assets/img/team/leader.jpg',
+    buddyImage: 'assets/img/team/buddy.jpg',
+    vpPhone: '+62 61 8229 0045',
+    vpEmail: 'jefry@nusa.net.id',
+    buddyPhone: '+62 61 8229 0046',
+    buddyEmail: 'cindy@nusa.net.id',
+    vpDesc: 'Beliau adalah Sales Manager Nusawork yang siap membantu Anda dalam posisi baru Anda.',
+    buddyDesc: 'Beliau adalah Buddy/Sobat Anda yang akan membimbing Anda serta memudahkan Anda untuk beradaptasi di lingkungan Perusahaan selama 2 bulan.'
+  },
+  'Technical': {
+    vice_president: 'Wardi',
+    buddy: 'Nando Firdaus',
+    vpImage: 'https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0200306%20-%20Wardi%20(Wardi).JPG?raw=true',
+    buddyImage: 'assets/img/team/buddy.jpg',
+    vpPhone: '+62 61 8229 0047',
+    vpEmail: 'wardi@nusa.net.id',
+    buddyPhone: '+62 61 8229 0048',
+    buddyEmail: 'nando@nusa.net.id',
+    vpDesc: 'Beliau adalah VP Technical yang siap membantu Anda dalam posisi baru Anda.',
+    buddyDesc: 'Beliau adalah Buddy/Sobat Anda yang akan membimbing Anda serta memudahkan Anda untuk beradaptasi di lingkungan Perusahaan selama 2 bulan.'
+  },
+  'Warehouse': {
+    vice_president: 'Steven',
+    buddy: 'Imelda Sari',
+    vpImage: 'https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0202330%20-%20Steven%20(Steven)%20-%20.JPG?raw=true',
+    buddyImage: 'assets/img/team/buddy.jpg',
+    vpPhone: '+62 61 8229 0049',
+    vpEmail: 'steven@nusa.net.id',
+    buddyPhone: '+62 61 8229 0050',
+    buddyEmail: 'imelda@nusa.net.id',
+    vpDesc: 'Beliau adalah Warehouse Supervisor yang siap membantu Anda dalam posisi baru Anda.',
+    buddyDesc: 'Beliau adalah Buddy/Sobat Anda yang akan membimbing Anda serta memudahkan Anda untuk beradaptasi di lingkungan Perusahaan selama 2 bulan.'
+  }
+};
+
+const organizationData = {
+  "Billing": {
+    "Billing Staff": ["Ayu Pratiwi", "Rendi Saputra"]
+  },
+  "BIS": {
+    "BIS Analyst": ["Arman Prabowo", "Selvi Marpaung"]
+  },
+  "Customer Experience": {
+    "CX Support": ["Novi Anggraini", "Tomi Hutabarat"]
+  },
+  "Engineer Bali": {
+    "Engineer Lapangan": ["Kadek Wirawan", "Made Satria"]
+  },
+  "Engineer Binjai": {
+    "Engineer Lapangan": ["Dedi Pratama", "Rio Sembiring"]
+  },
+  "Finance": {
+    "Accounting": ["Nia Wijaya", "Santi Lumban"],
+    "Payroll": ["Tono Prasetya"]
+  },
+  "Helpdesk": {
+    "Helpdesk Support": ["Rafi Nurdiansyah", "Lilis Andriani"]
+  },
+  "HR & GA": {
+    "HR Generalist": ["Rosaliana"],
+    "GA Staff": ["Lina Wulandari"]
+  },
+  "HRIS": {
+    "HRIS Support": ["Yosua Panggabean", "Bella Andriani"]
+  },
+  "Infra Cloud and POP": {
+    "Cloud Engineer": ["Rizki Mahendra"],
+    "POP Engineer": ["Andra Hutapea"]
+  },
+  "Nusawork": {
+    "Nusawork Staff": ["Maya Sari", "Doni Prayoga"]
+  },
+  "Operasional": {
+    "Operasional Support": ["Harun Firmansyah", "Lela Samosir"]
+  },
+  "POP": {
+    "POP Engineer": ["Ucup Sibarani", "Gunawan Putra"]
+  },
+  "Sales": {
+    "Sales Executive": ["Dedi Arif", "Wulan Simbolon"]
+  },
+  "Sales & Marketing Digital Business": {
+    "Digital Marketing": ["Fadhila Kurnia", "Imam Yahya"]
+  },
+  "Sales & Marketing Internet Access": {
+    "Sales IA": ["Salsa Pertiwi", "Rafly Pranoto"]
+  },
+  "Sales Access": {
+    "Access Consultant": ["Adit Prakarsa", "Rina Marlina"]
+  },
+  "Sales Bali A": {
+    "Sales Bali": ["Kadek Lestari", "Putu Wira"]
+  },
+  "Sales Bali B": {
+    "Sales Bali": ["Nyoman Aris", "Komang Deni"]
+  },
+  "Sales Binjai": {
+    "Sales Binjai": ["Dimas Ramadhan", "Raisa Devi"]
+  },
+  "Sales GWS": {
+    "Sales GWS": ["Denny Sanjaya", "Silvia Hutagaol"]
+  },
+  "Sales Medan A": {
+    "Sales Medan": ["Lukas Sihombing", "Nadia Siregar"]
+  },
+  "Sales Medan B": {
+    "Sales Medan": ["Bagus Surya", "Melinda Br Ginting"]
+  },
+  "Sales Medan C": {
+    "Sales Medan": ["Yudi Pranata", "Kania Hutasoit"]
+  },
+  "Sales Medan D": {
+    "Sales Medan": ["Samuel Sitanggang", "Vivi Br Sembiring"]
+  },
+  "Sales Medan F": {
+    "Sales Medan": ["Fauzan Hakim", "Dewi Sari"]
+  },
+  "Sales Nusawork": {
+    "Sales Nusawork": ["Randi Arjuna", "Mirna Anggraini"]
+  },
+  "Technical": {
+    "Technical Support": ["Budi Hartono", "Riko Prasetya"],
+    "Network Technician": ["Salim Yahya"]
+  },
+  "Warehouse": {
+    "Warehouse Staff": ["Gunawan", "Tari Oktavia"]
+  }
+};
+
+    // ===== ELEMENTS =====
+    const overlay = document.getElementById('welcomeOverlay');
+    const form = document.getElementById('welcomeForm');
+    const nameInput = document.getElementById('employeeName');
+    const divisionSelect = document.getElementById('division');
+    const bannerPlaceholder = document.getElementById('bannerPlaceholder');
+    const divisiDropdown = document.getElementById('divisiDropdown');
+    const timDropdown = document.getElementById('timDropdown');
+    const namaDropdown = document.getElementById('namaDropdown');
+    const resultBox = document.getElementById('resultBox');
+
+    // ===== HELPER FUNCTIONS =====
+    function escapeHtml(str) {
+      const map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+      };
+      return String(str).replace(/[&<>"']/g, s => map[s]);
+    }
+
+    function renderWelcomeBanner(user) {
+      const banner = document.createElement('div');
+      banner.className = 'welcome-banner';
+      banner.innerHTML = `
+        <button class="close-banner" title="Tutup">&times;</button>
+        <h2>Selamat Datang di Nusanet, ${escapeHtml(user.name)}!</h2>
+        <p>Kami sangat senang menyambut Anda sebagai bagian dari keluarga besar Nusanet di Divisi <strong>${escapeHtml(user.division)}</strong>.</p>
+        <p style="margin-bottom:8px;">Berikut rekan-rekan yang akan membantu Anda beradaptasi:</p>
+        <div class="divider"></div>
+        <div class="welcome-team" role="list">
+          <div class="welcome-team-card delay-1" role="listitem">
+            <img src="${escapeHtml(user.vpImage)}" alt="${escapeHtml(user.vp)}" class="welcome-team-photo" onerror="this.src='assets/img/team/team-1.jpg'">
+            <div class="welcome-team-name">${escapeHtml(user.vp)}</div>
+            <div class="welcome-team-role">Vice President (Leader)</div>
+            <div style="font-size: 12px; color: #3498DB; margin-top: 8px;">
+              <div>${escapeHtml(user.vpPhone || '+62 61 8229 0000')}</div>
+              <div>${escapeHtml(user.vpEmail || 'email@nusa.net.id')}</div>
+            </div>
+            <p style="font-size: 13px; color: #64748B; margin-top: 8px; line-height: 1.5;">${escapeHtml(user.vpDesc || 'Leader yang siap membantu Anda dalam posisi baru.')}</p>
+          </div>
+          <div class="welcome-team-card delay-2" role="listitem">
+            <img src="${escapeHtml(user.managerImage)}" alt="${escapeHtml(user.manager)}" class="welcome-team-photo" onerror="this.src='assets/img/team/team-2.jpg'">
+            <div class="welcome-team-name">${escapeHtml(user.manager)}</div>
+            <div class="welcome-team-role">Manager (Buddy)</div>
+            <div style="font-size: 12px; color: #3498DB; margin-top: 8px;">
+              <div>${escapeHtml(user.buddyPhone || '+62 61 8229 0000')}</div>
+              <div>${escapeHtml(user.buddyEmail || 'email@nusa.net.id')}</div>
+            </div>
+            <p style="font-size: 13px; color: #64748B; margin-top: 8px; line-height: 1.5;">${escapeHtml(user.buddyDesc || 'Buddy yang akan membimbing Anda beradaptasi selama 2 bulan.')}</p>
+          </div>
+          <div class="welcome-team-card delay-3" role="listitem">
+            <img src="https://github.com/alwis-droid/data-foto-karyawan/blob/main/FOTO%20KARYAWAN/0202369%20-%20Rosaliana%20Seftiani%20Devi%20(Ocha).jpeg?raw=true" alt="Rosaliana" class="welcome-team-photo" onerror="this.src='assets/img/team/team-3.jpg'">
+            <div class="welcome-team-name">Rosaliana</div>
+            <div class="welcome-team-role">HR Generalist</div>
+            <div style="font-size: 12px; color: #3498DB; margin-top: 8px;">
+              <div>+62 821-6386-4881</div>
+              <div>rosaliana@nusa.net.id</div>
+            </div>
+            <p style="font-size: 13px; color: #64748B; margin-top: 8px; line-height: 1.5;">Beliau adalah HR Generalist yang berperan dalam membantu Anda terkait administrasi SDM dan sebagai bridging antara Employee dan Perusahaan.</p>
+          </div>
+        </div>
+        <div class="divider"></div>
+
+        <!-- 90 Days Goals (styled to site) -->
+        <div style="margin-top:12px;">
+          <h4 style="color: var(--nusa-dark); margin:0 0 8px 0; font-size:16px;">90 Days Goals</h4>
+          <ul style="color: var(--text-primary); margin:0 0 12px 18px; line-height:1.6;">
+            <li><strong>Company Profile</strong> — Pelajari visi, sejarah singkat, struktur organisasi, dan layanan utama Nusanet.</li>
+            <li><strong>Misi Perusahaan</strong> — Pahami tujuan layanan dan orientasi kepada pelanggan.</li>
+            <li><strong>Core Values</strong> — Kenali nilai-nilai yang menjadi dasar cara kerja tim.</li>
+            <li><strong>Product Basics</strong> — Nusanet, Nusa.id, Nusawork, Nusaprospect: fitur utama dan pemanfaatannya.</li>
+            <li><strong>Komunikasi & Sisdur</strong> — Tata cara komunikasi internal sesuai prosedur.</li>
+            <li><strong>Peraturan & Kebijakan</strong> — Kebijakan perusahaan yang wajib dipatuhi.</li>
+            <li><strong>Deskripsi Pekerjaan</strong> — Tanggung jawab utama dan KPI awal.</li>
+            <li><strong>Presensi & Absensi</strong> — Penggunaan sistem presensi sesuai sisdur.</li>
+            <li><strong>Struktur & Alur Bisnis</strong> — Memahami rantai proses dan titik kontak antar unit.</li>
+            <li><strong>Platform Internal (IS / ISX)</strong> — is.nusa.net.id / isx.nusa.net.id untuk GT, SMS, pencarian customer, dan dokumen.</li>
+            <li><strong>Tools & Apps</strong> — Nusawork, Nusaprospect, My Nusa, PrivyID, dan Google Workspace.</li>
+            <li><strong>Pengembangan Diri</strong> — Baca "Atomic Habits" dan bagikan insight di morning meeting.</li>
+          </ul>
+
+          <h4 style="color: var(--nusa-dark); margin:10px 0 6px 0; font-size:16px;">Misi</h4>
+          <p style="color: var(--text-primary); margin:0 0 8px 0;">
+            Empower customers to choose us over alternatives by providing innovative and secure internet services, sincere customer care, and effective use of resources.
+          </p>
+          <hr style="border-color: rgba(0,0,0,0.06); margin:10px 0;">
+          <p style="color: var(--text-primary); margin:0;">
+            Membantu pelanggan memilih Nusanet melalui layanan Internet yang inovatif dan aman, perhatian tulus kepada pelanggan, serta penggunaan sumber daya yang efektif.
+          </p>
+        </div>
+      `;
+      banner.querySelector('.close-banner').addEventListener('click', () => banner.style.display = 'none');
+      bannerPlaceholder.appendChild(banner);
+    }
+
+    function showSection(sectionId) {
+      const sections = document.querySelectorAll('.page-section');
+      sections.forEach(section => section.classList.remove('active'));
+      const activeSection = document.getElementById(sectionId + '-section');
+      if (activeSection) activeSection.classList.add('active');
+
+      const navLinks = document.querySelectorAll('#navmenu a');
+      navLinks.forEach(link => link.classList.remove('active'));
+      const activeLink = document.querySelector(`#navmenu a[href="javascript:showSection('${sectionId}')"]`);
+      if (activeLink) activeLink.classList.add('active');
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ===== WELCOME FORM =====
+    const stored = JSON.parse(localStorage.getItem('nusanetUser'));
+    if (stored && stored.name && stored.division) {
+      renderWelcomeBanner(stored);
+      localStorage.removeItem('nusanetUser');
+      overlay.classList.add('hidden');
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const name = nameInput.value.trim();
+      const division = divisionSelect.value;
+      if (!name || !division) { alert('Mohon isi semua field'); return; }
+      
+      // ===== RULE KHUSUS UNTUK SALES MEDAN =====
+      let jobTitle = division;
+      if (division.includes("Sales Medan")) {
+        jobTitle = "Account Manager";
+      }
+      
+      const selected = divisionData[division] || {
+        vice_president: '-',
+        buddy: '-',
+        vpImage: 'assets/img/team/leader.jpg',
+        buddyImage: 'assets/img/team/buddy.jpg'
+      };
+      
+      renderWelcomeBanner({ 
+        name, 
+        division, 
+        jobTitle: jobTitle,
+        vp: selected.vice_president, 
+        manager: selected.buddy, 
+        vpImage: selected.vpImage, 
+        managerImage: selected.buddyImage,
+        vpPhone: selected.vpPhone,
+        vpEmail: selected.vpEmail,
+        buddyPhone: selected.buddyPhone,
+        buddyEmail: selected.buddyEmail,
+        vpDesc: selected.vpDesc,
+        buddyDesc: selected.buddyDesc
+      });
+      overlay.classList.add('hidden');
+      nameInput.value = '';
+      divisionSelect.value = '';
+      setTimeout(() => { const banner = document.querySelector('.welcome-banner'); if (banner) banner.scrollIntoView({ behavior: 'smooth' }); }, 300);
+    });
+
+    // ===== DROPDOWN FUNCTIONS =====
+    function populateDivisi() {
+      divisiDropdown.innerHTML = '<option value="">-- Pilih Divisi --</option>';
+      Object.keys(organizationData).forEach(divisi => {
+        const option = document.createElement('option');
+        option.value = divisi;
+        option.textContent = divisi;
+        divisiDropdown.appendChild(option);
+      });
+    }
+
+    function populateTim(divisi) {
+      timDropdown.innerHTML = '<option value="">-- Pilih Tim --</option>';
+      if (!divisi) return;
+      const teams = Object.keys(organizationData[divisi]);
+      teams.forEach(tim => {
+        const option = document.createElement('option');
+        option.value = tim;
+        option.textContent = tim;
+        timDropdown.appendChild(option);
+      });
+    }
+
+    function populateNama(tim) {
+      namaDropdown.innerHTML = '<option value="">-- Pilih Nama --</option>';
+      if (!tim) return;
+      const names = organizationData[selectedDivisi][tim];
+      names.forEach(name => {
+        const option = document.createElement('option');
+        option.value = name;
+        option.textContent = name;
+        namaDropdown.appendChild(option);
+      });
+    }
+
+    // ===== INITIALIZATION =====
+    populateDivisi();
+
+    divisiDropdown.addEventListener('change', function () {
+      const divisi = divisiDropdown.value;
+      populateTim(divisi);
+      timDropdown.dispatchEvent(new Event('change'));
+    });
+
+    timDropdown.addEventListener('change', function () {
+      const tim = timDropdown.value;
+      populateNama(tim);
+    });
+
+    // ===== FORM SUBMISSION =====
+    document.getElementById('employeeForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const name = document.getElementById('employeeName').value.trim();
+      const divisi = divisiDropdown.value;
+      const tim = timDropdown.value;
+      const nama = namaDropdown.value;
+
+      if (!name || !divisi || !tim || !nama) {
+        alert('Mohon lengkapi semua field');
+        return;
+      }
+
+      const userData = {
+        name: name,
+        division: divisi,
+        team: tim,
+        nama: nama
+      };
+
+      localStorage.setItem('nusanetUser', JSON.stringify(userData));
+      window.location.reload();
+    });
+  </script>
+</body>
+
+</html>
